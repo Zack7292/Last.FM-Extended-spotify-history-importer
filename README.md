@@ -83,7 +83,23 @@ cd <repo-name>
 
 ### 3. Add your Spotify files
 
-Copy your `Streaming_History_Audio_*.json` files ([Step 1](#step-1-get-your-spotify-extended-streaming-history)) into the **same folder** as `spotify_to_lastfm.py`.
+> **Important:** your `Streaming_History_Audio_*.json` files **must be in the same folder as `spotify_to_lastfm.py`**. The app only looks in its own folder when splitting, so files stored anywhere else are **not detected**.
+
+1. Copy your `Streaming_History_Audio_*.json` files ([Step 1](#step-1-get-your-spotify-extended-streaming-history)) into the folder that contains `spotify_to_lastfm.py`.
+2. Put the files **directly in that folder**, not inside a subfolder. Spotify's zip often extracts into a subfolder (e.g. "Spotify Extended Streaming History"): open it and move the `.json` files out.
+
+Your folder should look like this:
+
+```
+my-folder/
+├── spotify_to_lastfm.py
+├── Start_Windows.bat
+├── Streaming_History_Audio_2019.json
+├── Streaming_History_Audio_2020_1.json
+└── ...
+```
+
+(If you prefer to keep them elsewhere, use **Choose folder…** in section 1 of the app to point it at that folder.)
 
 ### 4. Start the app
 
@@ -107,7 +123,7 @@ Then follow the steps below.
 3. Click **Request data** and confirm via the email Spotify sends you.
 4. Wait. Spotify says this can take **up to 30 days**, but it often arrives sooner. You'll get an email when it's ready.
 5. Download the `.zip` from the email and extract it. Inside you'll find files named `Streaming_History_Audio_*.json`. These are the ones you need.
-6. Put them in the same folder as `spotify_to_lastfm.py` (see [Installation](#installation), part 3).
+6. Put them **directly in the same folder as `spotify_to_lastfm.py`**, otherwise the splitter won't detect them (see [Installation](#installation), part 3).
 
 (Spotify's page may look slightly different over time, but the option is always called "Extended streaming history".)
 
@@ -125,10 +141,11 @@ Your key and secret are stored only on your computer, in `~/.spotify_to_lastfm.j
 
 ### Step 3: Generate the JSON sublists
 
-1. In section **1. Split Spotify files**, click **Split into sublists of 2000**.
-2. The app merges all your `.json` files, removes listens shorter than 30 seconds, and cuts the result into parts of **2,000** entries.
-3. The parts are saved in a new **`split_output`** folder next to the script, named `Streaming_History_part001.json`, `part002.json`, and so on, in the same format as the originals. The last part holds the remainder.
-4. When it finishes, **only the first part** is loaded for the import (on purpose, so you can't send everything at once). Running the split again replaces the previous parts.
+1. Make sure your `.json` files are in the **same folder as `spotify_to_lastfm.py`** (the splitter only detects files there, unless you pick another folder with **Choose folder…**). The folder shown after "Source:" in section 1 is where it will look.
+2. In section **1. Split Spotify files**, click **Split into sublists of 2000**.
+3. The app merges all your `.json` files, removes listens shorter than 30 seconds, and cuts the result into parts of **2,000** entries.
+4. The parts are saved in a new **`split_output`** folder next to the script, named `Streaming_History_part001.json`, `part002.json`, and so on, in the same format as the originals. The last part holds the remainder.
+5. When it finishes, **only the first part** is loaded for the import (on purpose, so you can't send everything at once). Running the split again replaces the previous parts.
 
 Your original files are never changed.
 
