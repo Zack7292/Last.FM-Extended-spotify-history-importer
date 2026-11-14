@@ -1,0 +1,7 @@
+# Your personal Spotify data and generated files
+Streaming_History_*.json
+split_output/
+
+# Python
+__pycache__/
+*.pyc
